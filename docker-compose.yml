@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "${HTTP_PORT:-8080}:80"
+    environment:
+      - NGINX_HOST=${NGINX_HOST:-localhost}
+      - APP_ENV=${APP_ENV:-development}
+      - DEBUG_MODE=${DEBUG_MODE:-false}
+    volumes:
+      - ./html:/usr/share/nginx/html:ro
+    restart: unless-stopped
